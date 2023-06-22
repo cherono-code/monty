@@ -10,9 +10,9 @@ bus_t bus = {NULL, NULL, NULL, 0};
 
 int main(int argc, char *argv[])
 {
-	char *cont;
+	char *content;
 	FILE *file;
-	size_t s = 0;
+	size_t size = 0;
 	ssize_t read_line = 1;
 	stack_t *stack = NULL;
 	unsigned int counters = 0;
@@ -31,15 +31,15 @@ int main(int argc, char *argv[])
 	}
 	while (read_line > 0)
 	{
-		cont = NULL;
-		read_line = getline(&cont, &s, file);
-		bus.cont = cont;
+		content = NULL;
+		read_line = getline(&content, &size, file);
+		bus.content = content;
 		counters++;
 		if (read_line > 0)
 		{
-			execute(cont, &stack, counters, file);
+			execute(content, &stack, counters, file);
 		}
-		free(cont);
+		free(content);
 	}
 	free_stack(stack);
 	fclose(file);
